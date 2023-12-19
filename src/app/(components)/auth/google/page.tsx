@@ -1,21 +1,22 @@
 'use client'
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
+import dotenv from 'dotenv';
+dotenv.config()
 
 export default function Google() {
 
+    const client_id = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || '';
+
     const onSuccessHandler = (response: any) => {
         console.log('Google login successful.', response);
-
-        return <div>Success!</div>
     };
 
     const onErrorHandler = () => {
         console.log('error');
-        return <div>Error!</div>
     };
 
     return (
-        <GoogleOAuthProvider clientId="191860349187-bnuakvmj1nip2jh938i3s9ikj28jhifs.apps.googleusercontent.com">
+        <GoogleOAuthProvider clientId={client_id}>
             <GoogleLogin
                 onSuccess={onSuccessHandler}
                 onError={onErrorHandler}
